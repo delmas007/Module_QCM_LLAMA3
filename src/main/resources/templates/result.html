@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résultats du Test</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .email-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: #007bff;
+            color: #fff;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        .content {
+            padding: 40px;
+        }
+        .content p {
+            line-height: 1.8;
+            font-size: 16px;
+            margin: 15px 0;
+        }
+        .info-box {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9fc;
+            border-left: 4px solid #007bff;
+        }
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            overflow-x: auto;
+            display: block;
+        }
+        .results-table th, .results-table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+        .results-table th {
+            background: #007bff;
+            color: #fff;
+            text-transform: uppercase;
+        }
+        .status-correct {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .status-incorrect {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+            padding: 20px;
+            background: #f9f9fc;
+        }
+
+        @media screen and (max-width: 768px) {
+            .results-table th, .results-table td {
+                font-size: 14px;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <div class="header">
+        <h1>Résultats du Test</h1>
+    </div>
+
+    <div class="content">
+        <p>Bonjour,</p>
+        <p>Voici les détails de votre test :</p>
+
+        <div class="info-box">
+            <p><strong>Secteur :</strong> <span th:text="${infoTest.sector}"></span></p>
+            <p><strong>Niveau :</strong> <span th:text="${infoTest.level}"></span></p>
+            <p><strong>Date de début :</strong> <span th:text="${formattedStartDate}"></span></p>
+            <p><strong>Date de fin :</strong> <span th:text="${formattedEndDate}"></span></p>
+            <p><strong>Durée :</strong> <span th:text="${infoTest.duration}"></span></p>
+        </div>
+
+        <h2>Résultats détaillés</h2>
+        <table class="results-table">
+            <thead>
+            <tr>
+                <th>Question</th>
+                <th>Votre Réponse</th>
+                <th>Réponse Correcte</th>
+                <th>Statut</th>
+            </tr>
+            </thead>
+            <tbody th:each="result : ${resultats}">
+            <tr>
+                <td th:text="${result.question}"></td>
+                <td th:text="${result.answer}"></td>
+                <td th:text="${result.correctAnswer}"></td>
+                <td th:classappend="${result.answerStatus} == 'CORRECT' ? 'status-correct' : 'status-incorrect'" th:text="${result.answerStatus}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <p>Si vous avez des questions, n’hésitez pas à nous contacter.</p>
+    </div>
+
+    <div class="footer">
+        <p>© 2024 - Votre Entreprise. Tous droits réservés.</p>
+    </div>
+</div>
+</body>
+</html>
