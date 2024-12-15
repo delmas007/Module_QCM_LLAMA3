@@ -1,4 +1,4 @@
-package ci.devai.technicaltest.mapping;
+package ci.devai.technicaltest.service.mapping;
 
 
 import ci.devai.technicaltest.domain.Result;
